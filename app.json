@@ -1,0 +1,12 @@
+{
+  "name": "beam",
+  "displayName": "beam",
+  "expo": {
+    "name": "beam",
+    "slug": "beam",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
