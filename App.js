@@ -42,7 +42,7 @@ async function getCategories() {
   return keyTerms;
 }
 
-const suggestNews = async () => {
+async function suggestNews() {
   let article_url;
   const interest = "Gamestop";
   const newsResponse = await NewsAPI(interest);
@@ -63,7 +63,7 @@ const suggestNews = async () => {
   return suggestion;
 }
 
-const suggestMovie = async () => {
+async function suggestMovie() {
   const movie_title_keyword = "tenet"
   const response = await MovieAPI(movie_title_keyword);
 
