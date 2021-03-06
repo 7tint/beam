@@ -11,6 +11,7 @@ import { SmmryAPI } from '../apis/smmry-api.js';
 import { MovieAPI } from '../apis/movie-api.js';
 import { TVAPI } from '../apis/tv-api.js';
 import { ActorAPI } from '../apis/movie-actor-api.js';
+import { FeedCard } from '../components/feed_card.js';
 
 async function findKeyTerms(input) {
   const keyTerms = await CloudNaturalLanguageAPI(input);
@@ -46,11 +47,11 @@ async function getCategories() {
 }
 
 async function suggestNews() {
-  let article_url;
   const interest = "Gamestop";
   const newsResponse = await NewsAPI(interest);
   const articles = newsResponse.data.articles;
-  article_url = articles[1].url;
+  const article_url = articles[1].url;
+  const article_image_url = articles[1].urlToImage;
 
   const smmryResponse = await SmmryAPI(article_url);
   const summary = smmryResponse.data;
@@ -58,33 +59,26 @@ async function suggestNews() {
   const suggestion = {
     title: summary.sm_api_title,
     content: summary.sm_api_content,
-    url: article_url
+    url: article_url,
+    image_url: article_image_url,
   }
-
   console.log(suggestion);
-
   return suggestion;
 }
 
 async function suggestMovie() {
   const movie_title_keyword = "tenet"
   const response = await MovieAPI(movie_title_keyword);
-
   const suggestion = response.data.results[0];
-
   console.log(suggestion);
-
   return suggestion;
 }
 
 async function suggestTV() {
   const tv_title_keyword = "game of thrones"
   const response = await TVAPI(tv_title_keyword);
-
   const suggestion = response.data.results[0];
-
   console.log(suggestion);
-
   return suggestion;
 }
 
@@ -92,9 +86,7 @@ async function suggestMovieByActor() {
   const actor_keyword = "Christian Bale"
   const response = await ActorAPI(actor_keyword);
   const suggestion = response.data.cast[0];
-
   console.log(suggestion);
-
   return suggestion;
 }
 
@@ -120,6 +112,12 @@ export default class HomeScreen extends Component {
           <TouchableHighlight onPress={suggestMovieByActor}>
             <Text>Actor</Text>
           </TouchableHighlight>
+          <FeedCard
+            friend="Kirk"
+            title="Insert Article Title Here"
+            context="interests"
+            image_url="https://cdn.mos.cms.futurecdn.net/BQwukuZwwwXrg27B9Le2Q6.png"
+          />
         </View>
       </View>
     );
