@@ -5,6 +5,7 @@ import { CloudNaturalLanguage } from './apis/cloud-natural-language.js';
 import { GoogleKnowledgePanel } from './apis/google-knowledge-panel.js';
 import { NewsAPI } from './apis/news-api.js';
 import { SmmryAPI } from './apis/smmry-api.js';
+import { MovieAPI } from './apis/movie-api.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -62,6 +63,17 @@ const suggestNews = async () => {
   return suggestion;
 }
 
+const suggestMovie = async () => {
+  const movie_title_keyword = "tenet"
+  const response = await MovieAPI(movie_title_keyword);
+
+  const suggestion = response.data.results[0];
+
+  console.log(suggestion);
+
+  return suggestion;
+}
+
 function HomeScreen() {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -71,6 +83,9 @@ function HomeScreen() {
       </TouchableHighlight>
       <TouchableHighlight onPress={suggestNews}>
         <Text>News</Text>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={suggestMovie}>
+        <Text>Movie</Text>
       </TouchableHighlight>
     </View>
   );
