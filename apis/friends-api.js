@@ -1,34 +1,47 @@
-import * as fs from 'fs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const CreateFriend = async (friend) => {
-  fs.readFile('../json/friends.json', 'utf8', function readFileCallback(err, data) {
-    if (err){
-      console.log(err);
-    } else {
-      const allFriends = JSON.parse(data);
-
-      const newFriend = {
-        name: friend.name,
-        basicInfo: friend.basicInfo,
-        likes: friend.likes,
-        inputString: friend.inputString
-      };
-
-      allFriends.push(newFriend);
-      const jsonData = JSON.stringify(allFriends);
-
-      fs.writeFile('../json/friends.json', jsonData, 'utf8', callback);
-    }
-  });
+  try {
+    await AsyncStorage.setItem(
+      friend.lastName,
+      JSON.stringify(friend)
+    );
+    console.log("Stored " + friend);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export const ReadFriends = async (friend) => {
-  fs.readFile('../json/friends.json', 'utf8', function readFileCallback(err, data) {
-    if (err){
-      console.log(err);
-    } else {
-      const allFriends = JSON.parse(data);
-      return allFriends;
+export const ReadFriend = async (friend) => {
+  try {
+    const value = await AsyncStorage.getItem(friend.lastName);
+    if (value !== null) {
+      console.log(value);
     }
-  });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const GetAllData = async () => {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+    const result = await AsyncStorage.multiGet(keys);
+    const returnData = new Array;
+
+    result.forEach(function(entry, i) {
+      if (i > 0) {
+        returnData.push(JSON.parse(entry[i]));
+      }
+    });
+
+    console.log(returnData);
+    return returnData;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const ClearData = async() => {
+  AsyncStorage.clear();
 }
