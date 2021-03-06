@@ -2,6 +2,8 @@ import React, { useState, Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native';
 import { CloudNaturalLanguage } from './apis/cloud-natural-language.js';
 import { GoogleKnowledgePanel } from './apis/google-knowledge-panel.js';
+import { NewsAPI } from './apis/news-api.js';
+import { SmmryAPI } from './apis/smmry-api.js';
 
 class App extends Component {
   findKeyTerms = async (input) => {
@@ -37,12 +39,36 @@ class App extends Component {
     return keyTerms;
   }
 
+  suggestNews = async () => {
+    let article_url;
+    const interest = "Gamestop";
+    const newsResponse = await NewsAPI(interest);
+    const articles = newsResponse.data.articles;
+    article_url = articles[1].url;
+
+    const smmryResponse = await SmmryAPI(article_url);
+    const summary = smmryResponse.data;
+
+    const suggestion = {
+      title: summary.sm_api_title,
+      content: summary.sm_api_content,
+      url: article_url
+    }
+
+    console.log(suggestion);
+
+    return suggestion;
+  }
+
   render() {
     return(
       <View style={styles.container}>
         <Text>Open up App.js to start working on your app!</Text>
         <TouchableHighlight onPress={this.getCategories}>
            <Text>Cloud Natural Language</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this.suggestNews}>
+           <Text>News</Text>
         </TouchableHighlight>
       </View>
     );
