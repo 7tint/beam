@@ -101,7 +101,7 @@ async function suggestMovieByActor() {
 export function HomeScreen() {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <TopBar title="Friends" style={{flex: 1}}/>
+      <TopBar title="Home" style={{flex: 1}}/>
       <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
         <Text>Home</Text>
         <TouchableHighlight onPress={getCategories}>
