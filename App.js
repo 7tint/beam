@@ -1,61 +1,103 @@
 import React, { useState, Component } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CloudNaturalLanguage } from './apis/cloud-natural-language.js';
 import { GoogleKnowledgePanel } from './apis/google-knowledge-panel.js';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+async function findKeyTerms(input) {
+  const keyTerms = await CloudNaturalLanguage(input);
+  let keyTermsParsed = new Array();
+
+  keyTerms.forEach(function(keyTerm) {
+    let keyTermNew = {
+      name: keyTerm.name
+    }
+    keyTermsParsed.push(keyTermNew);
+  });
+
+  return keyTermsParsed;
+}
+
+async function getCategories() {
+  const string = "Taylor Swift is my friend's favourite artist!";
+  const keyTerms = await findKeyTerms(string);
+
+  await Promise.all(keyTerms.map(async function(keyTerm, i) {
+    let category = await GoogleKnowledgePanel(keyTerms[i].name);
+
+    if (category.data && category.data.itemListElement[0].result.description) {
+      keyTerm.category = category.data.itemListElement[0].result.description;
+    } else {
+      keyTerm.category = undefined;
+    }
+  }));
+
+  console.log(keyTerms);
+
+  return keyTerms;
+}
+
+function HomeScreen() {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Home</Text>
+      <TouchableHighlight onPress={getCategories}>
+        <Text>Cloud Natural Language</Text>
+      </TouchableHighlight>
+    </View>
+  );
+}
+
+function FriendsScreen() {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Friends</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Settings</Text>
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+function BeamTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen}
+      options= {
+        {tabBarIcon: ({color, size}) => (<MaterialCommunityIcons name="home-outline" color={color} size={size}/>)}
+      }
+      />
+      <Tab.Screen name="Friends" component={FriendsScreen}
+      options= {
+        {tabBarIcon: ({color, size}) => (<MaterialCommunityIcons name="account-multiple-outline" color={color} size={size}/>)}
+      }
+      />
+      <Tab.Screen name="Settings" component={SettingsScreen}
+      options= {
+        {tabBarIcon: ({color, size}) => (<MaterialCommunityIcons name="cog-outline" color={color} size={size}/>)}
+      }
+      />
+    </Tab.Navigator>
+  );
+}
 
 class App extends Component {
-  findKeyTerms = async (input) => {
-    const keyTerms = await CloudNaturalLanguage(input);
-    let keyTermsParsed = new Array();
-
-    keyTerms.forEach(function(keyTerm) {
-      let keyTermNew = {
-        name: keyTerm.name
-      }
-      keyTermsParsed.push(keyTermNew);
-    });
-
-    return keyTermsParsed;
-  }
-
-  getCategories = async () => {
-    const string = "Taylor Swift is my friend's favourite artist!";
-    const keyTerms = await this.findKeyTerms(string);
-
-    await Promise.all(keyTerms.map(async function(keyTerm, i) {
-      let category = await GoogleKnowledgePanel(keyTerms[i].name);
-
-      if (category.data && category.data.itemListElement[0].result.description) {
-        keyTerm.category = category.data.itemListElement[0].result.description;
-      } else {
-        keyTerm.category = undefined;
-      }
-    }));
-
-    console.log(keyTerms);
-
-    return keyTerms;
-  }
-
   render() {
-    return(
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <TouchableHighlight onPress={this.getCategories}>
-           <Text>Cloud Natural Language</Text>
-        </TouchableHighlight>
-      </View>
+    return (
+      <NavigationContainer>
+        <BeamTabs/>
+      </NavigationContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default App;
