@@ -13,7 +13,7 @@ async function getResponse(jsonRequest) {
   });
 }
 
-export const CloudNaturalLanguage = async (string) => {
+export const CloudNaturalLanguageAPI = async (string) => {
   const jsonRequest =
   {
     document: {

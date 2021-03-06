@@ -14,7 +14,7 @@ async function getResponse(query) {
   });
 }
 
-export const GoogleKnowledgePanel = async (query) => {
+export const GoogleKnowledgePanelAPI = async (query) => {
   const res = await getResponse(query);
   return res;
 }
