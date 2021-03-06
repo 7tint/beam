@@ -98,28 +98,30 @@ async function suggestMovieByActor() {
   return suggestion;
 }
 
-export function HomeScreen() {
-  return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <TopBar title="Home" style={{flex: 1}}/>
-      <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Home</Text>
-        <TouchableHighlight onPress={getCategories}>
-          <Text>Cloud Natural Language</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={suggestNews}>
-          <Text>News</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={suggestMovie}>
-          <Text>Movie</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={suggestTV}>
-          <Text>TV</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={suggestMovieByActor}>
-          <Text>Actor</Text>
-        </TouchableHighlight>
+export default class HomeScreen extends Component {
+  render() {
+    return (
+      <View style={{flex: 1, backgroundColor: 'white'}}>
+        <TopBar title="Home" style={{flex: 1}}/>
+        <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>Home</Text>
+          <TouchableHighlight onPress={getCategories}>
+            <Text>Cloud Natural Language</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={suggestNews}>
+            <Text>News</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={suggestMovie}>
+            <Text>Movie</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={suggestTV}>
+            <Text>TV</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={suggestMovieByActor}>
+            <Text>Actor</Text>
+          </TouchableHighlight>
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 }

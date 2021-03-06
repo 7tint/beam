@@ -22,8 +22,10 @@ class TopBar extends Component {
 
     if (this.props.title === 'Home') {
       icon = <MaterialCommunityIcons name='bell-outline' style={styles.icon}/>;
-    } else if (this.props.title === 'Friends') {
+    } else if (this.props.title === 'People') {
       icon = <MaterialCommunityIcons name='plus' style={styles.icon}/>;
+    } else {
+      icon = <View></View>
     }
 
     return(

@@ -4,9 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 
 // Page Components
-import { HomeScreen } from './components/home.js';
-import { FriendsScreen } from './components/friends.js';
-import { SettingsScreen } from './components/settings.js';
+import HomeScreen from './components/home.js';
+import FriendsScreen from './components/friends.js';
+import SettingsScreen from './components/settings.js';
 import { BottomTabs } from './components/footer.js';
 
 class App extends Component {

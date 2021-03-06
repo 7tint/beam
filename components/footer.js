@@ -3,9 +3,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 // Navigation
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeScreen } from '../components/home.js';
-import { FriendsScreen } from '../components/friends.js';
-import { SettingsScreen } from '../components/settings.js';
+import HomeScreen from '../components/home.js';
+import FriendsScreen from '../components/friends.js';
+import SettingsScreen from '../components/settings.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +17,7 @@ export function BottomTabs() {
         {tabBarIcon: ({color, size}) => (<MaterialCommunityIcons name="home-outline" color={color} size={size}/>)}
       }
       />
-      <Tab.Screen name="Friends" component={FriendsScreen}
+      <Tab.Screen name="People" component={FriendsScreen}
       options= {
         {tabBarIcon: ({color, size}) => (<MaterialCommunityIcons name="account-multiple-outline" color={color} size={size}/>)}
       }
