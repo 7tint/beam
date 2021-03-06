@@ -1,6 +1,7 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import TopBar from '../components/header.js';
 
 // APIs
 import { CloudNaturalLanguageAPI } from '../apis/language-api.js';
@@ -91,29 +92,32 @@ async function suggestMovieByActor() {
 
 export function HomeScreen() {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home</Text>
-      <TouchableHighlight onPress={getCategories}>
-        <Text>Cloud Natural Language</Text>
-      </TouchableHighlight>
-      <TouchableHighlight onPress={suggestNews}>
-        <Text>News</Text>
-      </TouchableHighlight>
-      <TouchableHighlight onPress={suggestMovie}>
-        <Text>Movie</Text>
-      </TouchableHighlight>
-      <TouchableHighlight onPress={suggestTV}>
-        <Text>TV</Text>
-      </TouchableHighlight>
-      <TouchableHighlight onPress={suggestMovieByActor}>
-        <Text>Actor</Text>
-      </TouchableHighlight>
-      <FeedCard 
-        friend="Kirk"
-        title="Insert Article Title Here"
-        context="interests"
-        image_url="https://cdn.mos.cms.futurecdn.net/BQwukuZwwwXrg27B9Le2Q6.png"
-      />
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <TopBar title="Home" style={{flex: 1}}/>
+      <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Home</Text>
+        <TouchableHighlight onPress={getCategories}>
+          <Text>Cloud Natural Language</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={suggestNews}>
+          <Text>News</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={suggestMovie}>
+          <Text>Movie</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={suggestTV}>
+          <Text>TV</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={suggestMovieByActor}>
+          <Text>Actor</Text>
+        </TouchableHighlight>
+        <FeedCard 
+          friend="Kirk"
+          title="Insert Article Title Here"
+          context="interests"
+          image_url="https://cdn.mos.cms.futurecdn.net/BQwukuZwwwXrg27B9Le2Q6.png"
+        />
+      </View>
     </View>
   );
 }
