@@ -9,7 +9,7 @@ class TopBar extends Component {
         marginTop: 70,
         marginLeft: 25,
         fontSize: 36,
-        fontFamily: 'CircularStd-Medium'
+        fontFamily: 'CircularStdMedium'
       },
       icon: {
         marginTop: 70,

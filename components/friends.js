@@ -41,13 +41,41 @@ export default class FriendsScreen extends Component {
   updateSearch = (search) => {
     this.setState({ search });
   };
-  
-  render() {
-    return (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
-        <TopBar title="People" style={{flex: 1}}/>
-        <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
 
+  render() {
+    const search = this.state.search;
+
+    const styles = StyleSheet.create({
+      containerStyle: {
+        backgroundColor: "white",
+        borderTopWidth: 0,
+        borderBottomWidth: 0,
+        borderColor: "white",
+        marginLeft: 25,
+        marginRight: 25,
+        paddingLeft: 0,
+        paddingRight: 0,
+      },
+      inputContainerStyle: {
+        backgroundColor: "#F6F6F6",
+        borderRadius: 10,
+        height: 36
+      },
+      inputStyle: {
+        fontSize: 15,
+        fontFamily: 'CircularStd-Medium'
+      }
+    });
+
+    return (
+      <View style={{flex: 1, justifyContent: 'flex-start', backgroundColor: 'white'}}>
+        <TopBar title="People" style={{flex: 1}}/>
+        <View style={{flex: 5, padding: 0}}>
+          <SearchBar
+            placeholder="Search" onChangeText={this.updateSearch} value={search}
+            platform="default" lightTheme={true} containerStyle={styles.containerStyle}
+            inputContainerStyle={styles.inputContainerStyle} inputStyle={styles.inptStyle}
+          />
         </View>
       </View>
     );

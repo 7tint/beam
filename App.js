@@ -21,10 +21,7 @@ class App extends Component {
   async loadFonts() {
     await Font.loadAsync({
       CircularStd: require('./assets/fonts/CircularStd.otf'),
-      'CircularStd-Medium': {
-        uri: require('./assets/fonts/CircularStd-Medium.otf'),
-        fontDisplay: Font.FontDisplay.FALLBACK,
-      },
+      CircularStdMedium: require('./assets/fonts/CircularStd-Medium.otf')
     });
     this.setState({ fontsLoaded: true });
   }
