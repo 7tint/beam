@@ -9,6 +9,8 @@ import { GoogleKnowledgePanelAPI } from '../apis/search-api.js';
 import { NewsAPI } from '../apis/news-api.js';
 import { SmmryAPI } from '../apis/smmry-api.js';
 import { MovieAPI } from '../apis/movie-api.js';
+import { TVAPI } from '../apis/tv-api.js';
+import { ActorAPI } from '../apis/movie-actor-api.js';
 
 async function findKeyTerms(input) {
   const keyTerms = await CloudNaturalLanguageAPI(input);
@@ -75,10 +77,31 @@ async function suggestMovie() {
   return suggestion;
 }
 
+async function suggestTV() {
+  const tv_title_keyword = "game of thrones"
+  const response = await TVAPI(tv_title_keyword);
+
+  const suggestion = response.data.results[0];
+
+  console.log(suggestion);
+
+  return suggestion;
+}
+
+async function suggestMovieByActor() {
+  const actor_keyword = "Christian Bale"
+  const response = await ActorAPI(actor_keyword);
+  const suggestion = response.data.cast[0];
+
+  console.log(suggestion);
+
+  return suggestion;
+}
+
 export function HomeScreen() {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <TopBar title="Home" style={{flex: 1}}/>
+      <TopBar title="Friends" style={{flex: 1}}/>
       <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
         <Text>Home</Text>
         <TouchableHighlight onPress={getCategories}>
@@ -89,6 +112,12 @@ export function HomeScreen() {
         </TouchableHighlight>
         <TouchableHighlight onPress={suggestMovie}>
           <Text>Movie</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={suggestTV}>
+          <Text>TV</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={suggestMovieByActor}>
+          <Text>Actor</Text>
         </TouchableHighlight>
       </View>
     </View>
