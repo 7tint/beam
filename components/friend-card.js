@@ -25,7 +25,7 @@ class FriendCard extends Component {
         fontFamily: 'CircularStdMedium',
         paddingBottom: 5
       },
-      relation: {
+      relationship: {
         fontSize: 13,
         color: '#8E8E93',
         fontFamily: 'CircularStd',
@@ -50,7 +50,7 @@ class FriendCard extends Component {
           <Image style={styles.avatar} source={{uri: this.props.profilePicture}}/>
           <View style={{flexDirection: "column", justifyContent: "center"}}>
             <Text style={styles.name}>{this.props.name}</Text>
-            <Text style={styles.relation}>{this.props.relationship ? this.props.relationship : "Not Specified"}</Text>
+            <Text style={styles.relationship}>{this.props.relationship ? this.props.relationship : "Not Specified"}</Text>
           </View>
         </View>
         {star}
