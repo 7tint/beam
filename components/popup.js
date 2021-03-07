@@ -5,12 +5,13 @@ import WebModal from 'modal-enhanced-react-native-web';
 export default class Popup extends Component {
   constructor(props) {
     super(props);
-    this.state = { isModalVisible: false };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isModalVisible !== this.state.isModalVisible) {
-      this.setState({ isModalVisible: nextProps.isModalVisible });
+    if (this.state.isModalVisible === false && nextProps.isModalVisible === true) {
+      this.setState({isModalVisible: true});
+    } else if (this.state.isModalVisible === true && nextProps.isModalVisible === false) {
+      this.setState({isModalVisible: false});
     }
   }
 
@@ -27,6 +28,7 @@ export default class Popup extends Component {
       centeredView: {
         flex: 1,
         padding: 0,
+        margin: 0,
         justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: 100
@@ -45,7 +47,6 @@ export default class Popup extends Component {
         elevation: 5,
       },
       cancel: {
-        flex: 1.5,
         color: "#0065FF",
         fontSize: 17,
         fontFamily: 'CircularStd'
@@ -71,16 +72,14 @@ export default class Popup extends Component {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Pressable
-                  onPress={() => this.setModalVisible(false)}
-                >
-                  <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                <View style={{flexDirection: "row", justifyContent: "space-between", marginBottom: 24}}>
+                  <Pressable onPress={() => this.setModalVisible(false)} style={{flex: 1.5}}>
                     <Text style={styles.cancel}>Cancel</Text>
-                    <Text style={styles.title}>{this.props.title}</Text>
-                    <View style={{flex: 1.5}}></View>
-                  </View>
-                  {this.props.content}
-                </Pressable>
+                  </Pressable>
+                  <Text style={styles.title}>{this.props.title}</Text>
+                  <View style={{flex: 1.5}}></View>
+                </View>
+                {this.props.content}
               </View>
             </View>
           </Modal>
@@ -97,16 +96,14 @@ export default class Popup extends Component {
             <View style={{flex: 1, marginLeft: -18, marginRight: -18, padding: 0,
             justifyContent: 'flex-start', alignItems: 'center', marginTop: 60}}>
               <View style={styles.modalView}>
-                <Pressable
-                  onPress={() => this.setModalVisible(false)}
-                >
-                  <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                <View style={{flexDirection: "row", justifyContent: "space-between", marginBottom: 24}}>
+                  <Pressable onPress={() => this.setModalVisible(false)} style={{flex: 1.5}}>
                     <Text style={styles.cancel}>Cancel</Text>
-                    <Text style={styles.title}>{this.props.title}</Text>
-                    <View style={{flex: 1.5}}></View>
-                  </View>
-                  {this.props.content}
-                </Pressable>
+                  </Pressable>
+                  <Text style={styles.title}>{this.props.title}</Text>
+                  <View style={{flex: 1.5}}></View>
+                </View>
+                {this.props.content}
               </View>
             </View>
           </WebModal>

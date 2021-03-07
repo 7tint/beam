@@ -47,10 +47,10 @@ class FriendCard extends Component {
     return(
       <View style={styles.cardStyle}>
         <View style={{flexDirection: "row", alignItems: "center"}}>
-          <Image style={styles.avatar} source={{uri:'https://upload.wikimedia.org/wikipedia/commons/8/85/Elon_Musk_Royal_Society_%28crop1%29.jpg'}}/>
+          <Image style={styles.avatar} source={{uri: this.props.profilePicture}}/>
           <View style={{flexDirection: "column", justifyContent: "center"}}>
-            <Text style={styles.name}>Elon Musk</Text>
-            <Text style={styles.relation}>Work Colleague</Text>
+            <Text style={styles.name}>{this.props.name}</Text>
+            <Text style={styles.relation}>{this.props.relationship ? this.props.relationship : "Not Specified"}</Text>
           </View>
         </View>
         {star}

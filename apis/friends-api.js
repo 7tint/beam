@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const CreateFriend = async (friend) => {
   try {
     await AsyncStorage.setItem(
-      friend.lastName,
+      friend.name,
       JSON.stringify(friend)
     );
     console.log("Stored " + friend);
@@ -30,11 +30,10 @@ export const GetAllData = async () => {
     const returnData = new Array;
 
     result.forEach(function(entry, i) {
-      if (i > 0) {
-        returnData.push(JSON.parse(entry[i]));
+      if (entry[0] != "EXPO_CONSTANTS_INSTALLATION_ID") {
+        returnData.push(JSON.parse(entry[1]));
       }
     });
-
     console.log(returnData);
     return returnData;
   } catch (error) {
