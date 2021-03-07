@@ -111,14 +111,14 @@ export default class HomeScreen extends Component {
           </TouchableHighlight>
           <TouchableHighlight onPress={suggestMovieByActor}>
             <Text>Actor</Text>
-          </TouchableHighlight>
-          <FeedCard
+          </TouchableHighlight>          
+        </View>
+        <FeedCard
             friend="Kirk"
             title="Insert Article Title Here"
             context="interests"
             image_url="https://cdn.mos.cms.futurecdn.net/BQwukuZwwwXrg27B9Le2Q6.png"
           />
-        </View>
       </View>
     );
   }
