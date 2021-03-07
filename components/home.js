@@ -65,6 +65,7 @@ async function suggestNews(interest) {
   const article_image_url = articles[1].urlToImage;
 
   const smmryResponse = await SmmryAPI(article_url);
+  console.log(smmryResponse);
   const summary = smmryResponse.data;
 
   const suggestion = {
@@ -113,91 +114,96 @@ export default class HomeScreen extends Component {
     let friends = this.state.friends;
     let feed = new Array();
 
-    for (let i = 0; i < friends.length; i++) {
-      while (feed.length < 2) {
-        let randomNum = Math.random() * 100;
+    if (this.state.friends && this.state.friends.length > 0 && this.state.friends[0].other) {
+      while (feed.length < 10) {
+        for (let i = 0; i < friends.length; i++) {
+          let randomNum = Math.random() * 100;
 
-        // News API
-        if (randomNum < 25) {
-          let news;
-          let context;
-          // let randomNum = Math.random() * 100;
-          if (friends[i].other) {
-            let index = Math.floor(Math.random() * friends[i].other.length);
-            let categories = await getCategories(friends[i].other[index]);
-            news = await suggestNews(categories[index].name);
-            context = "fun facts";
+          // News API
+          if (randomNum < 25) {
+            let news;
+            let context;
+            // let randomNum = Math.random() * 100;
+            if (friends[i].other) {
+              let index = Math.floor(Math.random() * friends[i].other.length);
+              let categories = await getCategories(friends[i].other[index]);
+              news = await suggestNews(categories[index].name);
+              context = "fun facts";
 
-            let entry = {
-              friend: friends[i].name,
-              title: news.title,
-              context: context,
-              image_url: news.image_url
+              let entry = {
+                friend: friends[i].name,
+                title: news.title,
+                context: context,
+                image_url: news.image_url
+              }
+              feed.push(entry);
             }
-            feed.push(entry);
+            // else if (randomNum >= 34 && randomNum < 67 && friends[i].interests) {
+            //   news = await suggestNews(friends[i].interests[0]);
+            //   context = "interests"
+            //
+            //   let entry = {
+            //     friend: friends[i].name,
+            //     title: news.title,
+            //     context: context,
+            //     image_url: news.image_url
+            //   }
+            //   feed.push(entry);
+            // }
+            // else if (friends[i].foods) {
+            //   news = await suggestNews(friends[i].foods[0]);
+            //   context = "favourite foods"
+            //
+            //   let entry = {
+            //     friend: friends[i].name,
+            //     title: news.title,
+            //     context: context,
+            //     image_url: news.image_url
+            //   }
+            //   feed.push(entry);
+            // }
           }
-          // else if (randomNum >= 34 && randomNum < 67 && friends[i].interests) {
-          //   news = await suggestNews(friends[i].interests[0]);
-          //   context = "interests"
-          //
-          //   let entry = {
-          //     friend: friends[i].name,
-          //     title: news.title,
-          //     context: context,
-          //     image_url: news.image_url
-          //   }
-          //   feed.push(entry);
-          // }
-          // else if (friends[i].foods) {
-          //   news = await suggestNews(friends[i].foods[0]);
-          //   context = "favourite foods"
-          //
-          //   let entry = {
-          //     friend: friends[i].name,
-          //     title: news.title,
-          //     context: context,
-          //     image_url: news.image_url
-          //   }
-          //   feed.push(entry);
-          // }
-        }
-        // Movie API
-        else if (randomNum >= 25 && randomNum < 50) {
-          let context;
-          let movie;
+          // Movie API
+          else if (randomNum >= 25 && randomNum < 50) {
+            let context;
+            let movie;
 
-          if (friends[i].films) {
-            let index = Math.floor(Math.random() * friends[i].films.length);
-            movie = await suggestMovie(friends[i].films[index]);
-            context = "favourite movies";
+            if (friends[i].films) {
+              let index = Math.floor(Math.random() * friends[i].films.length);
+              movie = await suggestMovie(friends[i].films[index]);
+              context = "favourite movies";
 
-            console.log(movie);
-            let entry = {
-              friend: friends[i].name,
-              title: "Check out " + movie.title + "!",
-              context: context,
-              image_url: "https://www.themoviedb.org/t/p/w1280" + movie.poster_path
+              console.log(movie);
+              let entry = {
+                friend: friends[i].name,
+                title: "Check out " + movie.title + "!",
+                context: context,
+                image_url: "https://www.themoviedb.org/t/p/w1280" + movie.poster_path
+              }
+              feed.push(entry);
             }
-            feed.push(entry);
           }
-        }
-        // TV API
-        else if (randomNum >= 50 && randomNum < 75) {
-          if (friends[i].films) {
+          // TV API
+          else if (randomNum >= 50 && randomNum < 75) {
+            if (friends[i].films) {
 
+            }
           }
-        }
-        // Spotify API
-        else {
-          if (friends[i].music) {
+          // Spotify API
+          else {
+            if (friends[i].music) {
 
+            }
+          }
+          console.log(feed.length);
+          console.log(i);
+          if (feed.length === (i + 1) * 2) {
+            i++;
           }
         }
-        // feed.push("test");
-      }
+       }
+      this.setState({feed: shuffleArray(feed)});
     }
-
-    this.setState({feed: shuffleArray(feed)});
   }
 
   async componentDidMount() {
