@@ -1,42 +1,55 @@
 import React, { useState, Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-import { Card, ListItem, Button, Icon } from 'react-native-elements';
+import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export const FeedCard = (props) => {
-  return (
-    <Card>
-      <View style={styles.cardContainer}>
-        <View style={styles.textContainer}>
-          <Text>Share with {props.friend}</Text>
-          <Text>{props.title}</Text>
-          <Text>Based on {props.context}</Text>
+class FeedCard extends Component {
+  render() {
+    const styles = StyleSheet.create({
+      cardStyle: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginTop: 12,
+        paddingBottom: 12,
+        minHeight: 100,
+        borderBottomWidth: 1,
+        borderBottomColor: "#EBECF0"
+      },
+      title: {
+        fontSize: 15,
+        fontFamily: 'CircularStdMedium',
+        paddingBottom: 5
+      },
+      subtitle: {
+        fontSize: 13,
+        fontFamily: 'CircularStd',
+        paddingBottom: 5
+      },
+      small: {
+        fontSize: 13,
+        color: '#A5ADBA',
+        fontFamily: 'CircularStd',
+      },
+      image: {
+        width: 72,
+        height: 72,
+        borderRadius: 4,
+      }
+    });
+
+    return(
+      <View style={styles.cardStyle}>
+        <View style={{flex: 4.5, flexDirection: "column", justifyContent: "center", paddingRight: 12}}>
+          <Text style={styles.subtitle}>Share With {this.props.friend}</Text>
+          <Text style={styles.title}>{this.props.title}</Text>
+          <Text style={styles.small}>Based on {this.props.context}</Text>
         </View>
-        <View style={styles.imageContainer}>
-          <Card.Image source={props.image_url} style={styles.imageSize}>
-          </Card.Image>
+        <View style={{flex: 1.5}}>
+          <Image style={styles.image} source={{uri: this.props.image_url}}/>
         </View>
       </View>
-    </Card>
-  );
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  textContainer: {
-    flex: 0.8,
-  },
-  cardContainer: {
-    flexDirection: "row",
-  },
-  imageSize: {
-    width: 50,
-    height: 50,
-    resizeMode: 'contain'
-  },
-  imageContainer: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 0.2
-  }
-});
+export default FeedCard;

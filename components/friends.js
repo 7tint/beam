@@ -49,7 +49,7 @@ export default class FriendsScreen extends Component {
           component={FriendsMain}
           options={{headerShown: false}}
         />
-        {this.state.friendsList.length ? this.FriendsStack(Stack) : undefined}
+        {this.state.friendsList && this.state.friendsList.length ? this.FriendsStack(Stack) : undefined}
       </Stack.Navigator>
     );
   }

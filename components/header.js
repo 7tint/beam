@@ -36,7 +36,7 @@ class TopBar extends Component {
 
     return(
       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',
-      alignItems: 'baseline', paddingLeft: 25, paddingRight: 25}}>
+      alignItems: 'baseline', paddingLeft: 25, paddingRight: 25, height: 80}}>
         <Text style={styles.title}>{this.props.title}</Text>
         {icon}
       </View>
