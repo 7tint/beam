@@ -12,11 +12,13 @@ export const CreateFriend = async (friend) => {
   }
 }
 
-export const ReadFriend = async (friend) => {
+export const ReadFriend = async (name) => {
   try {
-    const value = await AsyncStorage.getItem(friend.lastName);
+    const value = await AsyncStorage.getItem(name);
     if (value !== null) {
-      console.log(value);
+      let returnJSON = JSON.parse(value)
+      // console.log(returnJSON);
+      return returnJSON;
     }
   } catch (error) {
     console.log(error);
@@ -34,7 +36,7 @@ export const GetAllData = async () => {
         returnData.push(JSON.parse(entry[1]));
       }
     });
-    console.log(returnData);
+    // console.log(returnData);
     return returnData;
   } catch (error) {
     console.error(error)
