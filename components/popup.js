@@ -45,13 +45,13 @@ export default class Popup extends Component {
         elevation: 5,
       },
       cancel: {
-        flex: 2,
+        flex: 1.5,
         color: "#0065FF",
         fontSize: 17,
         fontFamily: 'CircularStd'
       },
       title: {
-        flex: 2,
+        flex: 3,
         fontSize: 17,
         fontFamily: 'CircularStdMedium',
         textAlign: 'center'
@@ -74,7 +74,12 @@ export default class Popup extends Component {
                 <Pressable
                   onPress={() => this.setModalVisible(false)}
                 >
-                  <Text style={styles.cancel}>Cancel</Text>
+                  <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                    <Text style={styles.cancel}>Cancel</Text>
+                    <Text style={styles.title}>{this.props.title}</Text>
+                    <View style={{flex: 1.5}}></View>
+                  </View>
+                  {this.props.content}
                 </Pressable>
               </View>
             </View>
@@ -98,8 +103,9 @@ export default class Popup extends Component {
                   <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                     <Text style={styles.cancel}>Cancel</Text>
                     <Text style={styles.title}>{this.props.title}</Text>
-                    <View style={{flex: 2}}></View>
+                    <View style={{flex: 1.5}}></View>
                   </View>
+                  {this.props.content}
                 </Pressable>
               </View>
             </View>

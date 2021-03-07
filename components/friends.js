@@ -81,7 +81,7 @@ export default class FriendsScreen extends Component {
           />
           <FriendCard name='Elon Musk' relation='Work Colleague' starred={true}/>
         </View>
-        <Popup isModalVisible={this.state.isModalVisible} title="Test"/>
+        <Popup isModalVisible={this.state.isModalVisible} title="Create New Contact" content={<Text style={{color: 'red'}}>Hello</Text>}/>
       </View>
     );
   }
