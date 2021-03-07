@@ -11,7 +11,7 @@ import { SmmryAPI } from '../apis/smmry-api.js';
 import { MovieAPI } from '../apis/movie-api.js';
 import { TVAPI } from '../apis/tv-api.js';
 import { ActorAPI } from '../apis/movie-actor-api.js';
-import { FeedCard } from '../components/feed_card.js';
+import { FeedCard } from '../components/feed-card.js';
 
 async function findKeyTerms(input) {
   const keyTerms = await CloudNaturalLanguageAPI(input);
