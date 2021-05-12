@@ -10,6 +10,7 @@ We remember, so you can live in the moment.
 Beam is a mobile app that helps you build and maintain meaningful personal relationships with your friends, family, and colleagues. It allows you to track important details about your contacts, and it provides recommended sharable content (articles, playlists, news, etc) based on their profiles.
 &nbsp;
 
+
 ## How it works
 When recommending articles, Beam utilizes the News API to retrieve the latest articles based on a contact’s interests. From there, Beam determines the best article to suggest based on relevance. It then passes the news article to the SMMRY API, which summarizes the content of the article. Beam also uses The Movie Database API to provide suggestions of movies and TV shows.
 
