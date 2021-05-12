@@ -4,7 +4,7 @@ We remember, so you can live in the moment.
 ### 2021 SF Hacks.
 #### :star2: Best Mobile Hack
 #### :star2: Best Use of Google Cloud
-
+&nbsp;
 
 ## What it does
 Beam is a mobile app that helps you build and maintain meaningful personal relationships with your friends, family, and colleagues. It allows you to track important details about your contacts, and it provides recommended sharable content (articles, playlists, news, etc) based on their profiles.
